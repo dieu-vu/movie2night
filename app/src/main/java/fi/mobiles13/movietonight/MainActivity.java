@@ -9,12 +9,16 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button btnSignIn;
+    Button btnGuest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnSignIn = findViewById(R.id.btnSignIn);
+        btnSignIn = (Button) findViewById(R.id.btnSignIn);
+        btnGuest = (Button) findViewById(R.id.btnGuest);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
     }
 }
