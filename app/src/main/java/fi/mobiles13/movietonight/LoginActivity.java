@@ -35,10 +35,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(inputName.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
-                } else {
-
                 }
             }
         });
+
+        
     }
 }
