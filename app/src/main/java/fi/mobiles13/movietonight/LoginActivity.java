@@ -2,6 +2,7 @@ package fi.mobiles13.movietonight;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,9 +36,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(inputName.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
-                } else {
-
                 }
+            }
+        });
+
+        //when user click sign up button
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
     }
