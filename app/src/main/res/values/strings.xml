@@ -8,4 +8,8 @@
     <string name="suggest">Sign up so you can save your favorite list</string>
     <string name="user_sign_in">Sign in</string>
     <string name="sing_up">Sign up</string>
+    <string name="Email">Email</string>
+    <string name="Age">Age</string>
+    <string name="Password">Password</string>
+    <string name="Username">Username</string>
 </resources>
