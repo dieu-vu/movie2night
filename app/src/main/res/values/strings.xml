@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MovieTonight</string>
+    <string name="title">Movie Tonight</string>
+    <string name="sign_in">Sign in</string>
+    <string name="guest">Continue as guest</string>
+    <string name="hint_username">Enter username</string>
+    <string name="hint_password">Enter password</string>
+    <string name="suggest">Sign up so you can save your favorite list</string>
+    <string name="user_sign_in">Sign in</string>
+    <string name="sing_up">Sign up</string>
 </resources>
