@@ -4,18 +4,12 @@ import java.util.ArrayList;
 
 public class User {
 
-    private String username;
-    private String password;
-    private int age;
-    private String email;
-    private ArrayList<String> searchHistory = new ArrayList<>(); //where to get the data ???
+    String username, password, email;
+    int age;
+
+    ArrayList<String> searchHistory = new ArrayList<>(); //where to get the data ???
 
     //constructor
-    public User(String username, int age) {
-        this.username = username;
-        this.age = age;
-    }
-
     public User(String username, String password, int age, String email) {
         this.username = username;
         this.password = password;
