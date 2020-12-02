@@ -45,6 +45,10 @@ public class LoginActivity extends AppCompatActivity {
                     userLocalStore.setUserLogin(true);
 
                 }
+                if (inputName == username && inputPassword == password) {
+                    userLocalStore.setUserLogin(true);
+
+                }
             }
         });
 
