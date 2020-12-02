@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText ePassword;
     private Button btnUserSignIn;
     private Button btnSignUp;
+    UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,15 @@ public class LoginActivity extends AppCompatActivity {
                 String inputName = eUsername.getText().toString();
                 String inputPassword = ePassword.getText().toString();
 
+                String username = userLocalStore.getLoginUser().username;
+                String password = userLocalStore.getLoginUser().password;
+
                 if(inputName.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
+                }
+                if (inputName == username && inputPassword == password) {
+                    userLocalStore.setUserLogin(true);
+
                 }
             }
         });
