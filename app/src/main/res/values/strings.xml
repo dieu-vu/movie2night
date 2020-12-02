@@ -12,4 +12,5 @@
     <string name="Age">Age</string>
     <string name="Password">Password</string>
     <string name="Username">Username</string>
+    <string name="SearchText">Search text</string>
 </resources>
