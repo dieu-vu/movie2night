@@ -29,11 +29,11 @@ public class UserLocalStore {
     public User getLoginUser() {
         String username = userLocalDatabase.getString("username", "");
         String password = userLocalDatabase.getString("password", "");
-        int age = userLocalDatabase.getInt("age", 0);
-        String email = userLocalDatabase.getString("email", "");
+        //int age = userLocalDatabase.getInt("age", 0);
+        //String email = userLocalDatabase.getString("email", "");
 
         //Create a new user
-        User storedUser = new User(username, password, age, email);
+        User storedUser = new User(username, password);
         return storedUser;
     }
 
