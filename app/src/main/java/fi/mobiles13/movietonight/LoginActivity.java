@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
                     }
 
-                    if(inputName.length() > 0 && inputPassword.length() > 0) {
+                    if(inputName.trim().length() > 0 && inputPassword.trim().length() > 0) {
                         if (inputName.equals(username) && inputPassword.equals(password)) {
                             //userLocalStore.setUserLogin(true);
 

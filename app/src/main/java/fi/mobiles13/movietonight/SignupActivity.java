@@ -3,6 +3,7 @@ package fi.mobiles13.movietonight;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ public class SignupActivity extends AppCompatActivity {
     Button btnRegister;
     EditText edtUsername, edtPassword, edtAge, edtEmail;
     UserLocalStore userLocalStore;
+
+    public static final String TAG = "USER_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
 
         userLocalStore = new UserLocalStore(this);
 
+        //Save user data on shared preferences when user signs up
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 User signUpUser = new User(username, password, age, email);
                 userLocalStore.storeUserData(signUpUser);
+                Log.d(TAG, "value" + userLocalStore.getLoginUser().username);
             }
         });
     }
