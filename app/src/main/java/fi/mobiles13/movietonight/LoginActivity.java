@@ -46,12 +46,16 @@ public class LoginActivity extends AppCompatActivity {
                     if(inputName.isEmpty() || inputPassword.isEmpty()) {
                         Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
                     }
-                    if (inputName.equals(username) && inputPassword.equals(password)) {
-                        //userLocalStore.setUserLogin(true);
-                        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
+
+                    if(inputName.length() > 0 && inputPassword.length() > 0) {
+                        if (inputName.equals(username) && inputPassword.equals(password)) {
+                            //userLocalStore.setUserLogin(true);
+
+                            Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
