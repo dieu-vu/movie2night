@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 public class UserLocalStore {
 
     public static final String SP_NAME = "userDetails";
+    public static final String KEY_NAME = "username";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_AGE = "age";
+    public static final String KEY_EMAIL = "email";
     SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Context context) {
@@ -15,10 +19,10 @@ public class UserLocalStore {
     //Save or write the data into shared preferences
     public void storeUserData (User user) {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
-        spEditor.putString("username", user.getUsername());
-        spEditor.putString("password", user.getPassword());
-        spEditor.putInt("age", user.getAge());
-        spEditor.putString("email", user.getEmail());
+        spEditor.putString(KEY_NAME, user.getUsername());
+        spEditor.putString(KEY_PASSWORD, user.getPassword());
+        spEditor.putInt(KEY_AGE, user.getAge());
+        spEditor.putString(KEY_EMAIL, user.getEmail());
         spEditor.commit();
     }
 
@@ -27,8 +31,8 @@ public class UserLocalStore {
      * @return
      */
     public User getLoginUser() {
-        String username = userLocalDatabase.getString("username", "");
-        String password = userLocalDatabase.getString("password", "");
+        String username = userLocalDatabase.getString(KEY_NAME, "");
+        String password = userLocalDatabase.getString(KEY_PASSWORD, "");
         //int age = userLocalDatabase.getInt("age", 0);
         //String email = userLocalDatabase.getString("email", "");
 
