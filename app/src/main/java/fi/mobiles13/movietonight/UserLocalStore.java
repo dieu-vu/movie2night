@@ -13,7 +13,7 @@ public class UserLocalStore {
     SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Context context) {
-        userLocalDatabase = context.getSharedPreferences(SP_NAME, 0);
+        userLocalDatabase = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 
     //Save or write the data into shared preferences
@@ -23,7 +23,7 @@ public class UserLocalStore {
         spEditor.putString(KEY_PASSWORD, user.getPassword());
         spEditor.putInt(KEY_AGE, user.getAge());
         spEditor.putString(KEY_EMAIL, user.getEmail());
-        spEditor.commit();
+        spEditor.apply();
     }
 
     /**
@@ -42,9 +42,9 @@ public class UserLocalStore {
     }
 
     //if user login, set it to be true
-    public void setUserLogin(boolean loggedIn) {
+    /*public void setUserLogin(boolean loggedIn) {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.putBoolean("loggedIn", loggedIn);
         spEditor.commit();
-    }
+    }*/
 }

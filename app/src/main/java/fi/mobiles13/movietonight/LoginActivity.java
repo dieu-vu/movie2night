@@ -2,6 +2,7 @@ package fi.mobiles13.movietonight;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,23 +30,29 @@ public class LoginActivity extends AppCompatActivity {
         btnUserSignIn = (Button) findViewById(R.id.btnUserSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
+        userLocalStore = new UserLocalStore(this);
         //When user click SignIn button
+
         btnUserSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(userLocalStore != null) {
+                    String inputName = eUsername.getText().toString();
+                    String inputPassword = ePassword.getText().toString();
 
-                String inputName = eUsername.getText().toString();
-                String inputPassword = ePassword.getText().toString();
+                    String username = userLocalStore.getLoginUser().username;
+                    String password = userLocalStore.getLoginUser().password;
 
-                String username = userLocalStore.getLoginUser().username;
-                String password = userLocalStore.getLoginUser().password;
-
-                if(inputName.isEmpty() || inputPassword.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
-                }
-                if (inputName == username && inputPassword == password) {
-                    userLocalStore.setUserLogin(true);
-                    Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                    if(inputName.isEmpty() || inputPassword.isEmpty()) {
+                        Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
+                    }
+                    if (inputName.equals(username) && inputPassword.equals(password)) {
+                        //userLocalStore.setUserLogin(true);
+                        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

@@ -24,6 +24,8 @@ public class SignupActivity extends AppCompatActivity {
         edtAge = findViewById(R.id.edtAge);
         edtEmail = findViewById(R.id.edtEmail);
 
+        userLocalStore = new UserLocalStore(this);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +39,5 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
