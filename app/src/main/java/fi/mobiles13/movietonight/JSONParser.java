@@ -6,14 +6,14 @@ import org.json.JSONObject;
 public class JSONParser {
 
     //When the user signup
-    public JSONObject makeRegisterJson(String name, String email, String password, long phone) throws JSONException {
+    public JSONObject makeRegisterJson(String username, String password, int age, String email) throws JSONException {
 
         JSONObject object = new JSONObject();
 
-        object.put("name", name);
-        object.put("email", email);
+        object.put("username", username);
         object.put("password", password);
-        object.put("phone", phone);
+        object.put("age", age);
+        object.put("email", email);
         // if its in array------
        /*JSONObject finalObject=new JSONObject();
        finalObject.put("request",object);
@@ -22,11 +22,11 @@ public class JSONParser {
     }
 
     //When the user login
-    public JSONObject makeLoginJson(String Name, String password) throws JSONException {
+    public JSONObject makeLoginJson(String username, String password) throws JSONException {
 
         JSONObject object = new JSONObject();
 
-        object.put("userName", Name);
+        object.put("userName", username);
         object.put("password", password);
         /*JSONObject finalObject=new JSONObject();
         finalObject.put("request",object);

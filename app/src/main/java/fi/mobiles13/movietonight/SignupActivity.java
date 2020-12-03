@@ -2,19 +2,30 @@ package fi.mobiles13.movietonight;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SignupActivity extends AppCompatActivity {
 
     Button btnRegister;
     EditText edtUsername, edtPassword, edtAge, edtEmail;
     UserLocalStore userLocalStore;
-
+    JSONParser jsonParser;
     public static final String TAG = "USER_DATA";
+
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "Preferences";
+    public String usernameKey;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +38,9 @@ public class SignupActivity extends AppCompatActivity {
         edtAge = findViewById(R.id.edtAge);
         edtEmail = findViewById(R.id.edtEmail);
 
-        userLocalStore = new UserLocalStore(this);
+        jsonParser = new JSONParser();
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        //userLocalStore = new UserLocalStore(this);
 
         //Save user data on shared preferences when user signs up
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -38,9 +51,21 @@ public class SignupActivity extends AppCompatActivity {
                 int age = Integer.parseInt(edtAge.getText().toString());
                 String email = edtEmail.getText().toString();
 
-                User signUpUser = new User(username, password, age, email);
-                userLocalStore.storeUserData(signUpUser);
-                Log.d(TAG, "value" + userLocalStore.getLoginUser().username);
+                try {
+                    JSONObject obj = jsonParser.makeRegisterJson(username, password, age, email);
+
+                    Log.d(TAG, obj.toString());
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    usernameKey = username;
+                    editor.putString(usernameKey, obj.toString());
+                    editor.commit();
+
+                    Log.d(TAG, "key: " + usernameKey + ", value: " + sharedPreferences.getString(usernameKey, ""));
+                    Toast.makeText(SignupActivity.this, "Registered Successfully!", Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
