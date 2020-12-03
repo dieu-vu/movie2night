@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         String password = userObject.get("password").toString();
 
                         Log.d(TAG, "name of the user log in : " + userObject.get("username").toString());
-                        
+
                         //validate if username and password are correct
                         if (inputName.equals(username) && inputPassword.equals(password)) {
                             Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
