@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(sharedPreferences.contains(inputName)) {
                     String userDetails = sharedPreferences.getString(inputName, "");
                     try {
+                        //convert string to JSONobject
                         JSONObject userObject = new JSONObject(userDetails);
                         String username = userObject.get("username").toString();
                         String password = userObject.get("password").toString();
