@@ -24,8 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignUp;
     private ImageView imgHome;
     SharedPreferences sharedPreferences;
-    private static final String MY_PREFERENCES = "Preferences";
-    private String usernameKey;
+    public static final String MyPREFERENCES = "Preferences";
     public static final String TAG = "USER_LOGIN";
 
     @Override
@@ -38,44 +37,44 @@ public class LoginActivity extends AppCompatActivity {
         btnUserSignIn = (Button) findViewById(R.id.btnUserSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
-        sharedPreferences = getSharedPreferences(MY_PREFERENCES, MODE_PRIVATE);
-        //When user click SignIn button
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        //When user click SignIn button
         btnUserSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sharedPreferences != null) {
-                    String inputName = eUsername.getText().toString();
-                    String inputPassword = ePassword.getText().toString();
+                //Get username and password from EditText
+                String inputName = eUsername.getText().toString();
+                String inputPassword = ePassword.getText().toString();
 
-                    String userDetails = sharedPreferences.getString(usernameKey, "");
+                //Ask username and password to be filled
+                if(inputName.isEmpty() || inputPassword.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
+                }
 
+                if(sharedPreferences.contains(inputName)) {
+                    String userDetails = sharedPreferences.getString(inputName, "");
                     try {
                         JSONObject userObject = new JSONObject(userDetails);
-                        usernameKey = userObject.get("username").toString();
                         String username = userObject.get("username").toString();
                         String password = userObject.get("password").toString();
-
+                        int age = Integer.valueOf(userObject.get("age").toString());
                         Log.d(TAG, "name of the user log in : " + userObject.get("username").toString());
-
-                        if(inputName.trim().length() > 0 && inputPassword.trim().length() > 0) {
-                            if (inputName.equals(usernameKey) && inputPassword.equals(password)) {
-                                //userLocalStore.setUserLogin(true);
-                                Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
-                            }
+                        //validate if username and password are correct
+                        if (inputName.equals(username) && inputPassword.equals(password)) {
+                            //userLocalStore.setUserLogin(true);
+                            Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    if(inputName.isEmpty() || inputPassword.isEmpty()) {
-                        Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
-                    }
-
                 }
+
             }
         });
 

@@ -18,13 +18,11 @@ public class SignupActivity extends AppCompatActivity {
 
     Button btnRegister;
     EditText edtUsername, edtPassword, edtAge, edtEmail;
-    UserLocalStore userLocalStore;
     JSONParser jsonParser;
     public static final String TAG = "USER_DATA";
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "Preferences";
-    public String usernameKey;
 
 
     @Override
@@ -53,15 +51,14 @@ public class SignupActivity extends AppCompatActivity {
 
                 try {
                     JSONObject obj = jsonParser.makeRegisterJson(username, password, age, email);
-
                     Log.d(TAG, obj.toString());
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    usernameKey = username;
-                    editor.putString(usernameKey, obj.toString());
+                    //Set key as username, value is an object of a user
+                    editor.putString(username, obj.toString());
                     editor.commit();
 
-                    Log.d(TAG, "key: " + usernameKey + ", value: " + sharedPreferences.getString(usernameKey, ""));
+                    Log.d(TAG, "key: " + username + ", value: " + sharedPreferences.getString(username, ""));
                     Toast.makeText(SignupActivity.this, "Registered Successfully!", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
