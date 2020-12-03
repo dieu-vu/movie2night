@@ -52,29 +52,29 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter all details correctly ", Toast.LENGTH_SHORT).show();
                 }
 
+                //check if the username input is available in shared preferences as a key
                 if(sharedPreferences.contains(inputName)) {
                     String userDetails = sharedPreferences.getString(inputName, "");
                     try {
                         JSONObject userObject = new JSONObject(userDetails);
                         String username = userObject.get("username").toString();
                         String password = userObject.get("password").toString();
-                        int age = Integer.valueOf(userObject.get("age").toString());
+
                         Log.d(TAG, "name of the user log in : " + userObject.get("username").toString());
+                        
                         //validate if username and password are correct
                         if (inputName.equals(username) && inputPassword.equals(password)) {
-                            //userLocalStore.setUserLogin(true);
                             Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                            //put user object to the next activity
+                            intent.putExtra("user", userObject.toString());
                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
             }
         });
 

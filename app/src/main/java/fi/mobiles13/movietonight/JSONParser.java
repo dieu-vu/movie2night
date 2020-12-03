@@ -14,10 +14,6 @@ public class JSONParser {
         object.put("password", password);
         object.put("age", age);
         object.put("email", email);
-        // if its in array------
-       /*JSONObject finalObject=new JSONObject();
-       finalObject.put("request",object);
-       return finalObject;*/
         return object;
     }
 
@@ -28,9 +24,6 @@ public class JSONParser {
 
         object.put("userName", username);
         object.put("password", password);
-        /*JSONObject finalObject=new JSONObject();
-        finalObject.put("request",object);
-        return finalObject;*/
         return object;
     }
 }
