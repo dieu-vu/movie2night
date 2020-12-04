@@ -4,7 +4,7 @@ Team member: Dung Tran, Dieu Vu, Thanh Tran
 
 ## Run the App
 1. Install Android Studio:
-[Link to downloas Android Studion](https://developer.android.com/studio?gclid=Cj0KCQiA2af-BRDzARIsAIVQUOegnlm_V6W7UdtvmBmKbhlZcjJnPJeRJwOqNqZD-LK2bt-wXA7WuQoaAsAyEALw_wcB&gclsrc=aw.ds)
+[Link to downloas Android Studio](https://developer.android.com/studio?gclid=Cj0KCQiA2af-BRDzARIsAIVQUOegnlm_V6W7UdtvmBmKbhlZcjJnPJeRJwOqNqZD-LK2bt-wXA7WuQoaAsAyEALw_wcB&gclsrc=aw.ds)
 2. Git clone <repo> to local machine
 3. Open Android Studio:
   File --> Open
