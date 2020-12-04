@@ -1,5 +1,6 @@
 ## MovieTonight App
 Mobile project at Metropolia UAS
+
 Team member: Dung Tran, Dieu Vu, Thanh Tran
 
 ## Run the App
