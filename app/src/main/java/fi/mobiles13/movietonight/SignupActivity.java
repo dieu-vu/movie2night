@@ -46,25 +46,31 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
-                int age = Integer.parseInt(edtAge.getText().toString());
+                String ageStr = edtAge.getText().toString();
                 String email = edtEmail.getText().toString();
 
-                try {
-                    JSONObject obj = jsonParser.makeRegisterJson(username, password, age, email);
-                    Log.d(TAG, obj.toString());
+                //Require user to fill up all information
+                if(username.isEmpty() || password.isEmpty() || ageStr.isEmpty() || email.isEmpty()) {
+                    Toast.makeText(SignupActivity.this, "Please enter required information correctly!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    try {
+                        int age = Integer.parseInt(ageStr);
+                        JSONObject obj = jsonParser.makeRegisterJson(username, password, age, email);
+                        Log.d(TAG, obj.toString());
 
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    //Set key as username, value is an object of a user
-                    editor.putString(username, obj.toString());
-                    editor.commit();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        //Set key as username, value is an object of a user
+                        editor.putString(username, obj.toString());
+                        editor.commit();
 
-                    Log.d(TAG, "key: " + username + ", value: " + sharedPreferences.getString(username, ""));
-                    Toast.makeText(SignupActivity.this, "Registered Successfully!", Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        Log.d(TAG, "key: " + username + ", value: " + sharedPreferences.getString(username, ""));
+                        Toast.makeText(SignupActivity.this, "Registered Successfully!", Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
     }
-
 }
