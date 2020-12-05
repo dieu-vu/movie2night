@@ -4,18 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/gradient_background">
 
     <TextView
         android:id="@+id/tvtitle"
-        android:layout_width="92dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="255dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="132dp"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:shadowColor="#9C27B0"
         android:text="@string/title"
+        android:textColor="#F33A0B83"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgHome" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -54,36 +61,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
-    <ImageView
-        android:id="@+id/imgHome"
-        android:layout_width="49dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/screen_background_light_transparent" />
-
     <Button
         android:id="@+id/btnUserSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
         android:layout_marginTop="48dp"
+        android:fontFamily="@font/baloo"
         android:text="@string/user_sign_in"
+        app:backgroundTint="#C18B27B0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSuggest" />
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/baloo"
         android:text="@string/sing_up"
+        app:backgroundTint="#C18B27B0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUserSignIn" />
+
+    <ImageView
+        android:id="@+id/imgHome"
+        android:layout_width="45dp"
+        android:layout_height="37dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_vector"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,24 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@drawable/gradient_background">
 
     <Button
         android:id="@+id/btnsignup2"
         android:layout_width="223dp"
         android:layout_height="48dp"
+        android:fontFamily="@font/baloo"
         android:gravity="center"
         android:text="Let's Go"
+        app:backgroundTint="#C18B27B0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <EditText
         android:id="@+id/edtAge"
-        android:layout_width="405dp"
-        android:layout_height="58dp"
+        android:layout_width="337dp"
+        android:layout_height="63dp"
         android:layout_marginBottom="444dp"
         android:ems="10"
         android:hint="@string/Age"
@@ -34,8 +37,8 @@
 
     <EditText
         android:id="@+id/edtSearch"
-        android:layout_width="405dp"
-        android:layout_height="58dp"
+        android:layout_width="335dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="264dp"
         android:ems="10"
         android:hint="@string/SearchText"
@@ -57,9 +60,10 @@
         android:id="@+id/txtRatedmovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
         android:text="Top rated movie"
-        android:textSize="16sp"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -71,6 +75,7 @@
         android:id="@+id/txtReSearches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
         android:text="Recent searches"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,5 +84,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRatedmovie"
         app:layout_constraintVertical_bias="0.484" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="37dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="372dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
