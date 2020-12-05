@@ -7,14 +7,14 @@ public class User {
     String username, password, email;
     int age;
 
-    ArrayList<String> searchHistory = new ArrayList<>(); //where to get the data ???
-
+    ArrayList<String> searchHistory;
     //constructor
     public User(String username, String password, int age, String email) {
         this.username = username;
         this.password = password;
         this.age = age;
         this.email = email;
+        this.searchHistory = new ArrayList<String>();
     }
 
     public User (String username, String password) {
@@ -22,6 +22,7 @@ public class User {
         this.password = password;
         this.age = -1;
         this.email = null;
+        this.searchHistory = new ArrayList<String>();
     }
 
     public String getUsername() {
@@ -40,7 +41,11 @@ public class User {
         return email;
     }
 
+    public void addHistory(String entry){
+        this.searchHistory.add(entry);
+    }
+
     public ArrayList<String> getSearchHistory() {
-        return searchHistory;
+        return this.searchHistory;
     }
 }

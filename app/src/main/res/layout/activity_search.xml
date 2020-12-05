@@ -8,7 +8,7 @@
     android:background="@drawable/gradient_background">
 
     <Button
-        android:id="@+id/btnsignup2"
+        android:id="@+id/searchBtn"
         android:layout_width="223dp"
         android:layout_height="48dp"
         android:fontFamily="@font/baloo"

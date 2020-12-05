@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 import os
 import json
 
@@ -19,9 +20,19 @@ with open(rating) as f:
             movie_id = data[0]
         except ValueError as e:
             continue
-        rating_dict[movie_id] = data[1]
+        if count >0:
+            rate = float(data[1].strip())
+            print(rate)
+        else:
+            rate = data[1]
+        rating_dict[movie_id] = rate
         line = f.readline()
-print(rating_dict)
+#print(rating_dict)
+top_rated_dict = {k: v for k,v in sorted(rating_dict.items(), key=lambda item: item[1], reverse=True)}
+print(type(top_rated_dict))
+top_rated_dict = dict(list(top_rated_dict.items())[:10000])
+
+print(top_rated_dict)
 
 with open(basic_data) as f:
     final_data = {}
@@ -38,17 +49,18 @@ with open(basic_data) as f:
             movie_id = data[0]
             year = int(data[5])
             movie_type = data[1]
-        except ValueError as e:
+        except Exception as e:
             continue
-        if (year <= 2000 or movie_type !='movie' or (movie_id not in rating_dict.keys())):
+        if (year <= 2010 or movie_type !='movie' or (movie_id not in top_rated_dict.keys())):
             continue
         counter += 1 
-        data_dict = {fieldnames[i]: data[i] for i in range(len(fieldnames))}
+        data_dict = {fieldnames[i]: data[i] for i in range(len(fieldnames)) if fieldnames[i] != "endYear"}
         movie_id = data_dict['tconst']
-        data_dict['rating'] = rating_dict[movie_id]
-        print(data_dict)
+        data_dict['rating'] = top_rated_dict[movie_id]
+        #print(data_dict)
         final_data[movie_id] = data_dict
-print(final_data)
-with open(json_name, 'w') as f:
-    json.dump(final_data, f, indent=4)
+#print(final_data)
+sorted_data = [v for v in sorted(final_data.values(), key=lambda item: item['rating'], reverse=True)]
+with open('sorted_data.json', 'w') as f:
+    json.dump(sorted_data, f, indent=4)
 

@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignUp;
     private ImageView imgHome;
     SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "Preferences";
+    public static final String MyPREFERENCES = "user_data";
     public static final String TAG = "USER_LOGIN";
 
     @Override

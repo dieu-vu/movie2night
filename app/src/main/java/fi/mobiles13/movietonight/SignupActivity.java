@@ -22,7 +22,7 @@ public class SignupActivity extends AppCompatActivity {
     public static final String TAG = "USER_DATA";
 
     SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "Preferences";
+    public static final String MyPREFERENCES = "user_data";
 
 
     @Override
