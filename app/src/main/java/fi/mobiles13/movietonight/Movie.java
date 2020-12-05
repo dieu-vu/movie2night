@@ -1,4 +1,5 @@
 package fi.mobiles13.movietonight;
+import com.google.gson.Gson;
 
 public class Movie {
     private String name;
@@ -13,6 +14,9 @@ public class Movie {
         this.isAdult = isAdult;
         this.year = year;
         this.rating = rating;
+
     }
+
+
 
 }

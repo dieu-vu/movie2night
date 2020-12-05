@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieTonight">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
