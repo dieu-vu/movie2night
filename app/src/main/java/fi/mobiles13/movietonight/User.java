@@ -19,17 +19,17 @@ public class User {
     int age;
     SharedPreferences sharedPreferences;
 
-    ArrayList<String> searchHistory;
+    String searchHistory;
     //constructor
     public User(String username, String password, int age, String email) {
         this.username = username;
         this.password = password;
         this.age = age;
         this.email = email;
-        this.searchHistory = new ArrayList<String>();
+        this.searchHistory = "";
     }
 
-    public User(String username, String password, int age, String email, ArrayList<String> searchHistory) {
+    public User(String username, String password, int age, String email, String searchHistory) {
         this.username = username;
         this.password = password;
         this.age = age;
@@ -42,7 +42,7 @@ public class User {
         this.password = password;
         this.age = -1;
         this.email = null;
-        this.searchHistory = new ArrayList<String>();
+        this.searchHistory = "";
     }
 
     //User constructor which received only username and share preferences of the app - to receive user info in process in Log In and Search Activity
@@ -60,11 +60,11 @@ public class User {
                 this.email = obj.getString("email");
                 Log.d("USER_DATA", this.getEmail());
                 try {
-                    ArrayList<String> searchHistory = (ArrayList<String>) obj.get("searchHistory");
+                    String searchHistory = obj.get("searchHistory").toString();
                     this.searchHistory = searchHistory;
                 }
                 catch (Exception e) {
-                    this.searchHistory = new ArrayList<String>();
+                    this.searchHistory = "";
                 }
                 Log.d("USER_DATA", String.valueOf(this.getSearchHistory()));
             }
@@ -92,10 +92,14 @@ public class User {
     }
 
     public void addHistory(String entry){
-        this.searchHistory.add(entry);
+        if (this.searchHistory.isEmpty()) {
+            this.searchHistory = entry;
+        } else {
+            this.searchHistory += ("," + entry);
+        }
     }
 
-    public ArrayList<String> getSearchHistory() {
+    public String getSearchHistory() {
         return this.searchHistory;
     }
 }

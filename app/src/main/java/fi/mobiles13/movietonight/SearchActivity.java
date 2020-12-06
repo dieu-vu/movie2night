@@ -23,17 +23,19 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
     EditText edtAge;
     int userAge;
+    String currentUserName;
 //    Log.d("BUTTON", findViewById(R.id.edtSearch));
 
     public static final String TAG = "USER_SEARCH";
 
-
+    sharedPrefsWriter spw = new sharedPrefsWriter();
     SharedPreferences sharedPreferences;
 
     @Override
@@ -46,12 +48,39 @@ public class SearchActivity extends AppCompatActivity {
         if(b != null) {
             String userName = b.getString("user");
             try {
+                //Prefill age after user logged in:
                 SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
                 User currentUser = new User(userName, sharedPreferences);
                 edtAge = findViewById(R.id.edtAge);
                 Log.d(TAG, "user age: " + currentUser.getAge());
                 userAge = currentUser.getAge();
                 edtAge.setText("Age: " + Integer.toString(currentUser.getAge()));
+
+                currentUserName = userName;
+
+                //Get and Show recent searches:
+                ArrayList<String> recentSearches = new ArrayList<String>();
+                String searchHistoryStr = currentUser.getSearchHistory();
+                ArrayList<String> searchHistory = new ArrayList<String>(Arrays.asList(searchHistoryStr.split(",")));
+                Log.d(TAG, "search history: " + searchHistory.toString());
+                if (searchHistory.size() <3){
+                    for (int i=searchHistory.size()-1; i>0 ;i--) {
+                        recentSearches.add(searchHistory.get(i));
+                    }
+                } else {
+                    for (int i = searchHistory.size()-1; i > searchHistory.size()-5; i--) {
+                        recentSearches.add(searchHistory.get(i));
+                    }
+                }
+                //Show recent searches in list view:
+                ListView recentSearchLv = (ListView) findViewById(R.id.listSavedSearch);
+                Log.d("MOVIE_DATA", "listView created");
+                recentSearchLv.setAdapter(new ArrayAdapter<String>(
+                        this,
+                        R.layout.movie_item_layout,
+                        recentSearches));
+                Log.d(TAG, recentSearches.toString());
+
             } catch (JSONException e){
                 e.printStackTrace();
             }
@@ -70,8 +99,19 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     ArrayList<Movie> results = MovieUtils.getInstance(SearchActivity.this).searchMovie(searchText, userAge, SearchActivity.this);
                     Log.d(TAG, results.toString());
-                    Gson gson = new Gson();
 
+                    //Update search History
+                    try {
+                        SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                        spw.updateUserData(currentUserName,sharedPreferences, "searchHistory",searchText);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    //Convert search string to Json string and pass to Result Activity
+                    Gson gson = new Gson();
                     String resultStr = gson.toJson(results);
                     Log.d(TAG,"result json: " + resultStr);
                     Intent intent = new Intent(SearchActivity.this, ResultActivity.class);

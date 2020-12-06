@@ -158,5 +158,4 @@ public class MovieUtils extends Application {
      private boolean checkContain(String str, String subStr){
         return str.toLowerCase().contains(subStr.toLowerCase());
      }
-    //TODO: getFavMovie, clear history?
 }

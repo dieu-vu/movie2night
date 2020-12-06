@@ -18,14 +18,23 @@ import static fi.mobiles13.movietonight.SignupActivity.USER_DATA_KEY;
 
 public class sharedPrefsWriter extends Application {
 
+    Context context;
+
     public static final String TAG = "CHECK_SP";
 
     public void updateUserData(String user, SharedPreferences sharedPreferences, String fieldName, String newData) throws JSONException {
         JSONObject obj = getData(user, sharedPreferences);
         switch (fieldName){
             case ("searchHistory"):
-                ArrayList<String> searchHistory = (ArrayList<String>) obj.get(fieldName);
-                searchHistory.add(newData);
+                String searchHistory;
+                try {
+                    searchHistory = obj.get(fieldName).toString();
+                    searchHistory += ("," + newData);
+                } catch (ClassCastException e) {
+                    searchHistory = newData;
+                }
+                obj.remove(fieldName);
+                obj.put(fieldName, searchHistory);
                 break;
             case ("age"):
                 obj.remove(fieldName);
