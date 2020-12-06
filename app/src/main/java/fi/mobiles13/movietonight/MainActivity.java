@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(MainActivity.this, SearchActivity.class);
+                intent1.putExtra("guest","guest");
                 startActivity(intent1);
             }
         });

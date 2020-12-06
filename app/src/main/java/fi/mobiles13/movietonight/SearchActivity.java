@@ -43,72 +43,89 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Button searchBtn = (Button) findViewById(R.id.searchBtn);
+        Log.d(TAG, "search activity starts");
+
         //Get user object from Login activity delivered by the Intent
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            String userName = b.getString("user");
-            try {
-                //Prefill age after user logged in:
-                SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
-                User currentUser = new User(userName, sharedPreferences);
-                edtAge = findViewById(R.id.edtAge);
-                Log.d(TAG, "user age: " + currentUser.getAge());
-                userAge = currentUser.getAge();
-                edtAge.setText("Age: " + Integer.toString(currentUser.getAge()));
+            //IF LOGGED IN:
+            if (b.containsKey("user")){
+                String userName = b.getString("user");
+                try {
+                    //Prefill age after user logged in:
+                    SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                    User currentUser = new User(userName, sharedPreferences);
+                    edtAge = findViewById(R.id.edtAge);
+                    Log.d(TAG, "user age: " + currentUser.getAge());
+                    userAge = currentUser.getAge();
+                    edtAge.setText("Age: " + Integer.toString(currentUser.getAge()));
 
-                currentUserName = userName;
+                    currentUserName = userName;
 
-                //Get and Show recent searches:
-                ArrayList<String> recentSearches = new ArrayList<String>();
-                String searchHistoryStr = currentUser.getSearchHistory();
-                ArrayList<String> searchHistory = new ArrayList<String>(Arrays.asList(searchHistoryStr.split(",")));
-                Log.d(TAG, "search history: " + searchHistory.toString());
-                if (searchHistory.size() <3){
-                    for (int i=searchHistory.size()-1; i>0 ;i--) {
-                        recentSearches.add(searchHistory.get(i));
+                    //Get and Show recent searches:
+                    ArrayList<String> recentSearches = new ArrayList<String>();
+                    String searchHistoryStr = currentUser.getSearchHistory();
+                    ArrayList<String> searchHistory = new ArrayList<String>(Arrays.asList(searchHistoryStr.split(",")));
+                    Log.d(TAG, "search history: " + searchHistory.toString());
+                    if (searchHistory.size() < 3) {
+                        for (int i = searchHistory.size() - 1; i > 0; i--) {
+                            recentSearches.add(searchHistory.get(i));
+                        }
+                    } else {
+                        for (int i = searchHistory.size() - 1; i > searchHistory.size() - 5; i--) {
+                            recentSearches.add(searchHistory.get(i));
+                        }
                     }
-                } else {
-                    for (int i = searchHistory.size()-1; i > searchHistory.size()-5; i--) {
-                        recentSearches.add(searchHistory.get(i));
-                    }
+
+                    //SHOW RECENT SEARCHES IN LISTVIEW:
+                    ListView recentSearchLv = (ListView) findViewById(R.id.listSavedSearch);
+                    Log.d("MOVIE_DATA", "listView created");
+                    recentSearchLv.setAdapter(new ArrayAdapter<String>(
+                            this,
+                            R.layout.movie_item_layout,
+                            recentSearches));
+                    Log.d(TAG, recentSearches.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                //Show recent searches in list view:
-                ListView recentSearchLv = (ListView) findViewById(R.id.listSavedSearch);
-                Log.d("MOVIE_DATA", "listView created");
-                recentSearchLv.setAdapter(new ArrayAdapter<String>(
-                        this,
-                        R.layout.movie_item_layout,
-                        recentSearches));
-                Log.d(TAG, recentSearches.toString());
+            }
 
-            } catch (JSONException e){
-                e.printStackTrace();
+            //IF CHOOSE CONTINUE AS GUEST:
+            else if (b.containsKey("guest")) {
+                edtAge = findViewById(R.id.edtAge);
+                Toast.makeText(SearchActivity.this, "Please enter your Age", Toast.LENGTH_SHORT).show();
+                updateAge();
             }
         }
 
 
-        //Handle search String and pass to MovieUtils searchMovie method
-
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Handle search String and pass to MovieUtils searchMovie method
                 EditText searchEdt = findViewById(R.id.edtSearch);
                 String searchText = searchEdt.getText().toString();
-                if (searchText.isEmpty()){
+
+                if (searchText.isEmpty()) {
                     Toast.makeText(SearchActivity.this, "Please enter search texts", Toast.LENGTH_SHORT).show();
+                } else if (userAge == 0){
+                    Toast.makeText(SearchActivity.this, "Please enter your age", Toast.LENGTH_SHORT).show();
+                    updateAge();
                 } else {
                     ArrayList<Movie> results = MovieUtils.getInstance(SearchActivity.this).searchMovie(searchText, userAge, SearchActivity.this);
-                    Log.d(TAG, results.toString());
+                    Log.d(TAG, "search result" + results.toString());
 
                     //Update search History
-                    try {
-                        SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
-                        spw.updateUserData(currentUserName,sharedPreferences, "searchHistory",searchText);
+                    if (b.containsKey("user")) {
+                        try {
+                            SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                            spw.updateUserData(currentUserName, sharedPreferences, "searchHistory", searchText);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-
 
                     //Convert search string to Json string and pass to Result Activity
                     Gson gson = new Gson();
@@ -137,9 +154,17 @@ public class SearchActivity extends AppCompatActivity {
             MovieUtils.getInstance(this).initData(this);
             Log.d("MOVIE_DATA", "init data");
         }
-        //Set list view of saved Searches if user logged in
 
 
+    }
 
+    public void updateAge(){
+        edtAge = findViewById(R.id.edtAge);
+        try{
+            userAge = Integer.valueOf(edtAge.getText().toString());
+        } catch (NumberFormatException e){
+            Toast.makeText(SearchActivity.this, "Please enter your Age in number", Toast.LENGTH_SHORT).show();
+            e.getStackTrace();
+        }
     }
 }
