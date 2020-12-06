@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
                     edtAge = findViewById(R.id.edtAge);
                     Log.d(TAG, "user age: " + currentUser.getAge());
                     userAge = currentUser.getAge();
-                    edtAge.setText("Age: " + Integer.toString(currentUser.getAge()));
+                    edtAge.setText(Integer.toString(currentUser.getAge()));
 
                     currentUserName = userName;
 
