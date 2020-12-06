@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignUp;
     private ImageView imgHome;
     SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "user_data";
+    public static final String USER_DATA_KEY = "user_data";
     public static final String TAG = "USER_LOGIN";
 
     @Override
@@ -37,7 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         btnUserSignIn = (Button) findViewById(R.id.btnUserSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences(USER_DATA_KEY, Context.MODE_PRIVATE);
 
         //When user click SignIn button
         btnUserSignIn.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (inputName.equals(username) && inputPassword.equals(password)) {
                             Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
                             //put user object to the next activity
-                            intent.putExtra("user", userObject.toString());
+                            intent.putExtra("user", username);
                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "Password or Username is incorrect", Toast.LENGTH_SHORT).show();

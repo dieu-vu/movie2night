@@ -13,8 +13,9 @@
         android:layout_height="48dp"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="Let's Go"
+        android:text="Let's Search"
         app:backgroundTint="#C18B27B0"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,34 +57,67 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.38030097" />
 
-    <TextView
-        android:id="@+id/txtRatedmovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:text="Top rated movie"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
-        app:layout_constraintVertical_bias="0.16" />
+    <LinearLayout
+        android:id="@+id/ratedMovieBox"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:layout_marginTop="35dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toBottomOf="@id/edtSearch">
 
-    <TextView
-        android:id="@+id/txtReSearches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:text="Recent searches"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRatedmovie"
-        app:layout_constraintVertical_bias="0.484" />
+        <TextView
+            android:id="@+id/txtRatedmovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:text="Top rated movie"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp" />
+
+        <ListView
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/listTopRated"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/savedSearchBox"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:layout_marginTop="35dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toBottomOf="@id/ratedMovieBox">
+
+        <TextView
+            android:id="@+id/txtReSearches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:text="Recent searches"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/black" />
+
+        <ListView
+            android:id="@+id/listSavedSearch"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -98,7 +132,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="372dp" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

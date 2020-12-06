@@ -13,4 +13,5 @@
     <string name="Password">Password</string>
     <string name="Username">Username</string>
     <string name="SearchText">Search text</string>
+    <string name="movie_url">Link</string>
 </resources>
