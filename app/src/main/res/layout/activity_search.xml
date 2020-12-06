@@ -22,33 +22,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
-    <EditText
-        android:id="@+id/edtAge"
-        android:layout_width="337dp"
-        android:layout_height="63dp"
-        android:layout_marginBottom="444dp"
-        android:ems="10"
-        android:hint="@string/Age"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.189" />
+    <LinearLayout
+        android:id="@+id/infoBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/ratedMovieBox"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintEnd_toStartOf="@id/guideline4"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/searchBtn">
 
-    <EditText
-        android:id="@+id/edtSearch"
-        android:layout_width="335dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="264dp"
-        android:ems="10"
-        android:hint="@string/SearchText"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAge"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/edtAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:ems="10"
+            android:hint="@string/Age"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:ems="10"
+            android:hint="@string/SearchText"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -67,7 +71,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline3"
         app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintTop_toBottomOf="@id/edtSearch">
+        app:layout_constraintTop_toBottomOf="@id/infoBox">
 
         <TextView
             android:id="@+id/txtRatedmovie"
