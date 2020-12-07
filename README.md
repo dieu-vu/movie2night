@@ -28,10 +28,10 @@ Link for the source data: https://www.imdb.com/interfaces/
     * We save the json file "sorted_data.json" to the assets folder in Android app and use to get the movie data into the app
 
 ## Helper classes:
-###1. JSONParser
+1. JSONParser
 * getJsonFromAssets: Read and convert json file from assets folder to String format. This method is used when initiate Data in class MovieUtils.
 * makeJson methods are used to create json objects for user class.
-###2. Movie Utils
+2. Movie Utils
 * To use as a Singleton to get the MovieUtils methods to process with the movie data in different activities.
 * Important methods in this class:
     * When instance of the class is called, it will check if the shared preferences of "movie_data" have any data. If not, it will initiate the data from sorted_data.json file in the assets folder.
@@ -39,5 +39,5 @@ Link for the source data: https://www.imdb.com/interfaces/
     * the MovieUtils instance is called only when we hit the Search button in Search Activity.
     * getAllMovies() method: get all movies data from shared preferences and convert it to an ArrayList of Movie objects.
     * searchMovie() method: received the array list of Movie objects from getAllMovie() and performs the search using user's age and search texts from TextView in Search activity.
-###3. sharedPrefsWriter
+3. sharedPrefsWriter
 * Helper class to process with updating user data with new user input in other activity.
