@@ -91,13 +91,7 @@ public class User {
         return email;
     }
 
-    public void addHistory(String entry){
-        if (this.searchHistory.isEmpty()) {
-            this.searchHistory = entry;
-        } else {
-            this.searchHistory += ("," + entry);
-        }
-    }
+
 
     public String getSearchHistory() {
         return this.searchHistory;

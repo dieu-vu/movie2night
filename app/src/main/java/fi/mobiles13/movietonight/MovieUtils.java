@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 import static fi.mobiles13.movietonight.LoginActivity.USER_DATA_KEY;
 
+
+//Singleton to handle all Movie object and Movie data
 public class MovieUtils extends Application {
     private static final String ALL_MOVIES_KEY = "all_movies";
     private static final String TAG = "MOVIE_DATA";
@@ -31,13 +33,15 @@ public class MovieUtils extends Application {
     private User user;
 
 
+    //Initiate object - constructor
     private MovieUtils(Context context, SharedPreferences sharedPreferences){
+        //user shared preferences to call data from movie_data in the context
         sharedPreferences = context.getSharedPreferences("movie_data", Context.MODE_PRIVATE);
         Log.d(TAG, "MovieUtils initialized");
         //Check if shared preferences have any data, otherwise init data
         if (getAllMovies(context).size() == 0){
             allMovies = new ArrayList<>();
-            initData(context);
+            initData(context); //if the device doesn't have the shared prefs movie_data.xml yet, then init the data
         }
     }
 
@@ -51,6 +55,7 @@ public class MovieUtils extends Application {
             return instance;
         }
     }
+
 
     public void initData(Context context){
         //Add initial data from asset file
@@ -88,7 +93,7 @@ public class MovieUtils extends Application {
         }
         Log.d(TAG, movies.toString());
 
-        //Convert the array of all Movie objects to Json and save into sharedPreferences
+        //Convert the array of all Movie objects to Json and save into sharedPreferences movie_data.xml
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         editor.putString(ALL_MOVIES_KEY, gson.toJson(movies));
@@ -96,10 +101,12 @@ public class MovieUtils extends Application {
         Log.d(TAG, "movie data written");
     }
 
+    //METHOD TO GET ALL MOVIE DATA AS AN ARRAY OF MOVIE OBJECTS
     public ArrayList<Movie> getAllMovies(Context context){
         sharedPreferences = context.getSharedPreferences("movie_data", Context.MODE_PRIVATE);
         Log.d(TAG, "sharedPreferences" + sharedPreferences);
         if (sharedPreferences.contains(ALL_MOVIES_KEY)){
+            //transfer array to Movie objects
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<Movie>>(){}.getType();
             ArrayList<Movie> movies = gson.fromJson(sharedPreferences.getString(ALL_MOVIES_KEY, null), type);
@@ -112,6 +119,8 @@ public class MovieUtils extends Application {
         return new ArrayList<Movie>();
     }
 
+
+    // METHOD TO GET TOP RATED MOVIES
     public ArrayList<String> getTopRated(Context context){
         ArrayList<String> topRated = new ArrayList<>();
         for (int i=0; i<5;i++){
@@ -120,6 +129,7 @@ public class MovieUtils extends Application {
         Log.d(TAG, topRated.toString());
         return topRated;
     }
+
 
     public Movie getMovieByID(String id, Context context){
         ArrayList<Movie> movies = getAllMovies(context);
@@ -134,7 +144,7 @@ public class MovieUtils extends Application {
     }
 
 
-
+    //METHOD TO SEARCH MOVIE BASED ON INPUT SEARCH STRINGS:
     public ArrayList<Movie> searchMovie (String searchStr, int age, Context context){
         ArrayList<Movie> movies = getAllMovies(context);
         ArrayList<Movie> resultMovies = new ArrayList<>();

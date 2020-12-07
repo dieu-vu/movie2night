@@ -65,8 +65,11 @@ public class SearchActivity extends AppCompatActivity {
                     //Get and Show recent searches:
                     ArrayList<String> recentSearches = new ArrayList<String>();
                     String searchHistoryStr = currentUser.getSearchHistory();
+                    //convert from search history as String to ArrayList<String>
                     ArrayList<String> searchHistory = new ArrayList<String>(Arrays.asList(searchHistoryStr.split(",")));
                     Log.d(TAG, "search history: " + searchHistory.toString());
+
+                    //show max 5 recent searches, if less than 3 history records then show all
                     if (searchHistory.size() < 3) {
                         for (int i = searchHistory.size() - 1; i > 0; i--) {
                             recentSearches.add(searchHistory.get(i));
@@ -140,7 +143,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-
         //Set list view of top rated movies
         if (MovieUtils.getInstance(this) != null) {
             ListView topRated = (ListView) findViewById(R.id.listTopRated);
@@ -154,8 +156,7 @@ public class SearchActivity extends AppCompatActivity {
             MovieUtils.getInstance(this).initData(this);
             Log.d("MOVIE_DATA", "init data");
         }
-
-
+        
     }
 
     public void updateAge(){
