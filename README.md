@@ -41,4 +41,3 @@ Link for the source data: https://www.imdb.com/interfaces/
     * searchMovie() method: received the array list of Movie objects from getAllMovie() and performs the search using user's age and search texts from TextView in Search activity.
 ###3. sharedPrefsWriter
 * Helper class to process with updating user data with new user input in other activity.
->>>>>>> update readme
