@@ -12,3 +12,6 @@ Team member: Dung Tran, Dieu Vu, Thanh Tran
 4. Choose emulator to run the app:
   Tools --> AVD Manager --> choose the device to run
 5. Run --> run app
+
+## JAVADoc of the App
+https://users.metropolia.fi/~dungtra/AndroidProject1/
