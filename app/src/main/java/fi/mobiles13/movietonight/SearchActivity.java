@@ -34,9 +34,9 @@ public class SearchActivity extends AppCompatActivity {
 //    Log.d("BUTTON", findViewById(R.id.edtSearch));
 
     public static final String TAG = "USER_SEARCH";
-
     sharedPrefsWriter spw = new sharedPrefsWriter();
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +109,20 @@ public class SearchActivity extends AppCompatActivity {
                 //Handle search String and pass to MovieUtils searchMovie method
                 EditText searchEdt = findViewById(R.id.edtSearch);
                 String searchText = searchEdt.getText().toString();
+                updateAge();
+                Log.d(TAG, "check age before search: " + userAge);
+                if (userAge != (int)userAge) {
+                    Toast.makeText(SearchActivity.this, "Please enter your age", Toast.LENGTH_SHORT).show();
+                    updateAge();
+                    Log.d(TAG, String.valueOf(userAge));
+                }
 
                 if (searchText.isEmpty()) {
                     Toast.makeText(SearchActivity.this, "Please enter search texts", Toast.LENGTH_SHORT).show();
-                } else if (userAge == 0){
-                    Toast.makeText(SearchActivity.this, "Please enter your age", Toast.LENGTH_SHORT).show();
-                    updateAge();
+
                 } else {
+                    Log.d(TAG,"current Age: " + userAge);
+                    updateAge();
                     ArrayList<Movie> results = MovieUtils.getInstance(SearchActivity.this).searchMovie(searchText, userAge, SearchActivity.this);
                     Log.d(TAG, "search result" + results.toString());
 

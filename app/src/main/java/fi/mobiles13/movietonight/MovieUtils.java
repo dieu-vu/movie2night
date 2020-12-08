@@ -37,6 +37,10 @@ public class MovieUtils extends Application {
     private MovieUtils(Context context, SharedPreferences sharedPreferences){
         //user shared preferences to call data from movie_data in the context
         sharedPreferences = context.getSharedPreferences("movie_data", Context.MODE_PRIVATE);
+        Log.d(TAG, "sharedprefs "+ sharedPreferences.toString());
+        if (sharedPreferences == null){
+            initData(context);
+        }
         Log.d(TAG, "MovieUtils initialized");
         //Check if shared preferences have any data, otherwise init data
         if (getAllMovies(context).size() == 0){
@@ -78,13 +82,13 @@ public class MovieUtils extends Application {
                 JSONObject entry = moviesJsonArray.getJSONObject(i);
                 String id = entry.getString("tconst");
                 String name = entry.getString("primaryTitle");
-                String isAdult = entry.getString("isAdult");
+                Boolean isAdult = entry.getBoolean("isAdult");
                 String year = entry.getString("startYear");
                 String genre = entry.getString("genres");
                 String rating = entry.getString("rating");
                 String url = entry.getString("url");
                 Log.d(TAG, id+name+isAdult+year+genre+rating+url);
-                Movie movie = new Movie(id, name, genre, Boolean.valueOf(isAdult), Integer.valueOf(year), Double.valueOf(rating), url);
+                Movie movie = new Movie(id, name, genre, isAdult, Integer.valueOf(year), Double.valueOf(rating), url);
                 Log.d(TAG, String.valueOf(movie));
                 movies.add(movie);
             }
@@ -104,6 +108,7 @@ public class MovieUtils extends Application {
     //METHOD TO GET ALL MOVIE DATA AS AN ARRAY OF MOVIE OBJECTS
     public ArrayList<Movie> getAllMovies(Context context){
         sharedPreferences = context.getSharedPreferences("movie_data", Context.MODE_PRIVATE);
+
         Log.d(TAG, "sharedPreferences" + sharedPreferences);
         if (sharedPreferences.contains(ALL_MOVIES_KEY)){
             //transfer array to Movie objects
@@ -150,13 +155,26 @@ public class MovieUtils extends Application {
         ArrayList<Movie> resultMovies = new ArrayList<>();
         if (null != movies){
             for (Movie m: movies){
+                Log.d("USER_SEARCH", "Search Age: " + age);
                 if (age > 17){
-                    if (checkContain(m.getName(), searchStr) || checkContain(m.getGenre(),searchStr) || m.isAdult()) {
+                    Log.d("USER_SEARCH", "is adult is running");
+                    if (checkContain(m.getName(), searchStr) || checkContain(m.getGenre(),searchStr)) {
                         resultMovies.add(m);
                     }
                 } else {
-                    if (checkContain(m.getName(), searchStr) || checkContain(m.getGenre(),searchStr) || !(m.isAdult())) {
-                        resultMovies.add(m);
+                    if ((checkContain(m.getName(), searchStr) || checkContain(m.getGenre(),searchStr))) {
+                        Boolean isAdult = m.isAdult();
+                        if(isAdult == true){
+                            Log.d("USER_SEARCH","this should run instead");
+                            resultMovies = new ArrayList<Movie>();
+                        } else {
+                            Log.d("USER_SEARCH","search is adult" + isAdult);
+                            Log.d("USER_SEARCH","this should not run");
+                            resultMovies.add(m);
+                        }
+                        Log.d("USER_SEARCH","search is adult" + m.isAdult());
+                        Log.d("USER_SEARCH","search is not adult" + !(m.isAdult()));
+
                     }
                 }
             }
