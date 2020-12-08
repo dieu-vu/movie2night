@@ -70,12 +70,12 @@ public class SearchActivity extends AppCompatActivity {
                     Log.d(TAG, "search history: " + searchHistory.toString());
 
                     //show max 5 recent searches, if less than 3 history records then show all
-                    if (searchHistory.size() < 3) {
+                    if (searchHistory.size() < 3 ) {
                         for (int i = searchHistory.size() - 1; i > 0; i--) {
                             recentSearches.add(searchHistory.get(i));
                         }
                     } else {
-                        for (int i = searchHistory.size() - 1; i > searchHistory.size() - 5; i--) {
+                        for (int i = searchHistory.size() - 1; i > searchHistory.size() - searchHistory.size()+1; i--) {
                             recentSearches.add(searchHistory.get(i));
                         }
                     }
